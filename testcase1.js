@@ -1,12 +1,21 @@
 const { Builder, By, until } = require('selenium-webdriver');
 
-async function checkHomePageVisibility() {
+async function runTests() {
     let driver = await new Builder().forBrowser('chrome').build();
 
     try {
+        // Go to site
         await driver.get('http://automationexercise.com');
-        await driver.wait(until.elementLocated(By.className('fa fa-home')), 3000);
+        
+        // Make sure home is visible
+        await driver.wait(until.elementIsVisible(driver.findElement(By.className('fa fa-home'))));
         console.log('Home page is visible successfully');
+
+        // Find signup button and click     
+        let signupButton = await driver.findElement(By.className('fa fa-lock'));
+        await signupButton.click();
+        console.log('Clicked on sign up button');
+
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {
@@ -14,8 +23,4 @@ async function checkHomePageVisibility() {
     }
 }
 
-async function runTests() {
-    checkHomePageVisibility()
-}
-
-runTests();
+runTests(); 
