@@ -18,15 +18,32 @@ async function runTests() {
         // Make sure home is visible New User Signup is visible
         await driver.wait(until.elementIsVisible(driver.findElement(By.className('signup-form'))));
         console.log('New User Signup is visible successfully');
-    }
 
-    
-    catch (error) {
+        // Locate the name input field by its name attribute
+        let nameInput = await driver.findElement(By.name('name'));
+        // Enter the name
+        await nameInput.sendKeys('Tatevik');
+        // Wait a little bit
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        
+        // Locate the Email Address input field by xpath
+        let emailInput = await driver.findElement(By.xpath('//*[@id="form"]/div/div/div[3]/div/form/input[3]'));
+
+        // Enter the email address
+        await emailInput.sendKeys('tatew.petrosyan@gmail.com');
+        console.log('New User name and email entered successfully');
+        // Wait a little bit
+        await new Promise(resolve => setTimeout(resolve, 10000));
+        // Click on 'Signup' button
+        let submitButton = await driver.findElement(By.className('btn btn-default'));
+        await submitButton.click();
+        console.log('Signup button clicked successfully');
+
+    } catch (error) {
         console.error('An error occurred:', error);
     } finally {
         await driver.quit();
     }
-
 }
 
 runTests(); 
