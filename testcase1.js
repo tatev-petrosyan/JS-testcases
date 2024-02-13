@@ -15,12 +15,19 @@ async function runTests() {
         let signupButton = await driver.findElement(By.className('fa fa-lock'));
         await signupButton.click();
         console.log('Clicked on sign up button');
+        // Make sure home is visible New User Signup is visible
+        await driver.wait(until.elementIsVisible(driver.findElement(By.className('signup-form'))));
+        console.log('New User Signup is visible successfully');
+    }
 
-    } catch (error) {
+    
+    catch (error) {
         console.error('An error occurred:', error);
     } finally {
         await driver.quit();
     }
+
 }
 
 runTests(); 
+
