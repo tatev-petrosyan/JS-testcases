@@ -1,4 +1,9 @@
-const { Builder, By, until } = require('selenium-webdriver');
+const { Builder, By, until, Select } = require('selenium-webdriver');
+
+async function wait() {
+    // Wait a little bit
+    await new Promise(resolve => setTimeout(resolve, 500));
+}
 
 async function runTests() {
     let driver = await new Builder().forBrowser('chrome').build();
@@ -9,57 +14,48 @@ async function runTests() {
 
         // Make sure home is visible
         await driver.wait(until.elementIsVisible(driver.findElement(By.className('fa fa-home'))));
-        console.log('Home page is visible successfully');
 
         // Find signup button and click     
         let signupButton = await driver.findElement(By.className('fa fa-lock'));
         await signupButton.click();
-        console.log('Clicked on sign up button');
        
         // Make sure home is visible New User Signup is visible
         await driver.wait(until.elementIsVisible(driver.findElement(By.className('signup-form'))));
-        console.log('New User Signup is visible successfully');
 
-        // Locate the name input field by its name attribute
+         // Enter the name
         let nameInput = await driver.findElement(By.name('name'));
-
-        // Enter the name
         await nameInput.sendKeys('Tatevik');
+        wait();
 
-        // Wait a little bit
-        await new Promise(resolve => setTimeout(resolve, 500));
-
-        // Locate the Email Address input field by xpath
+        // Locate the Email Address input field by xpath and Enter the email address
         let emailInput = await driver.findElement(By.xpath('//*[@id="form"]/div/div/div[3]/div/form/input[3]'));
-
-        // Enter the email address
         await emailInput.sendKeys('tatew.petrosyan@gmail.com');
-        console.log('New User name and email entered successfully');
-
-        // Wait a little bit
-        await new Promise(resolve => setTimeout(resolve, 500));
 
         // Click on 'Signup' button
         let submitButton = await driver.findElement(By.xpath('//*[@id="form"]/div/div/div[3]/div/form/button'));
         await submitButton.click();
-        console.log('Signup button clicked successfully');
-
-        // Wait a little bit
-        await new Promise(resolve => setTimeout(resolve, 500));
-
-        // TODO: ??
-        // await driver.get('https://automationexercise.com/signup');
+        wait();
 
         // Make ENTER ACCOUNT INFORMATION' is visible
         await driver.wait(until.elementIsVisible(driver.findElement(By.className('col-sm-4 col-sm-offset-1'))));
-        console.log('ENTER ACCOUNT INFORMATION is visible successfully');
 
-        // Wait a little bit
-        await new Promise(resolve => setTimeout(resolve, 500));
-
-        let password = await driver.findElement(By.name('password'));
+        // Click on gender radio button
+        let genderRadioBtn = driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[1]/div[2]'));
+        genderRadioBtn.click();
+        wait();
+        
+        // Enter password
+        let password = await driver.findElement(By.id('password'));
         await password.sendKeys('Tatev2022.');
-        console.log('Password is entered');
+        wait();
+
+        const daysDropdown = await driver.findElement(By.id('days'));
+        daysDropdown.click();
+        const select = new Select(daysDropdown);
+        await select.selectByValue('6');
+        wait();
+        await new Promise(resolve => setTimeout(resolve, 5000));
+
 
     } catch (error) {
         console.error('An error occurred:', error);
