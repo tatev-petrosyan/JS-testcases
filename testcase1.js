@@ -18,11 +18,11 @@ async function runTests() {
         // Find signup button and click     
         let signupButton = await driver.findElement(By.className('fa fa-lock'));
         await signupButton.click();
-       
+
         // Make sure home is visible New User Signup is visible
         await driver.wait(until.elementIsVisible(driver.findElement(By.className('signup-form'))));
 
-         // Enter the name
+        // Enter the name
         let nameInput = await driver.findElement(By.name('name'));
         await nameInput.sendKeys('Tatevik');
         wait();
@@ -43,19 +43,19 @@ async function runTests() {
         let genderRadioBtn = driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[1]/div[2]'));
         genderRadioBtn.click();
         wait();
-        
+
         // Enter password
-        let password = await driver.findElement(By.id('password'));
+        let password = await driver.findElement(By.name('password'));
         await password.sendKeys('Tatev2022.');
         wait();
 
+        // Select day in the dropdown
         const daysDropdown = await driver.findElement(By.id('days'));
         daysDropdown.click();
         const select = new Select(daysDropdown);
         await select.selectByValue('6');
         wait();
         await new Promise(resolve => setTimeout(resolve, 5000));
-
 
     } catch (error) {
         console.error('An error occurred:', error);
