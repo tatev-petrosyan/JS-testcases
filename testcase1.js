@@ -1,12 +1,14 @@
 const { Builder, By, until } = require('selenium-webdriver');
 
+
+
 async function runTests() {
     let driver = await new Builder().forBrowser('chrome').build();
 
     try {
         // Go to site
         await driver.get('http://automationexercise.com');
-        
+
         // Make sure home is visible
         await driver.wait(until.elementIsVisible(driver.findElement(By.className('fa fa-home'))));
         console.log('Home page is visible successfully');
@@ -24,8 +26,8 @@ async function runTests() {
         // Enter the name
         await nameInput.sendKeys('Tatevik');
         // Wait a little bit
-        await new Promise(resolve => setTimeout(resolve, 5000));
-        
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
         // Locate the Email Address input field by xpath
         let emailInput = await driver.findElement(By.xpath('//*[@id="form"]/div/div/div[3]/div/form/input[3]'));
 
@@ -33,11 +35,26 @@ async function runTests() {
         await emailInput.sendKeys('tatew.petrosyan@gmail.com');
         console.log('New User name and email entered successfully');
         // Wait a little bit
-        await new Promise(resolve => setTimeout(resolve, 10000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
         // Click on 'Signup' button
-        let submitButton = await driver.findElement(By.className('btn btn-default'));
+        let submitButton = await driver.findElement(By.xpath('//*[@id="form"]/div/div/div[3]/div/form/button'));
         await submitButton.click();
         console.log('Signup button clicked successfully');
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Make ENTER ACCOUNT INFORMATION' is visible
+        await driver.get('https://automationexercise.com/signup');
+
+        await driver.wait(until.elementIsVisible(driver.findElement(By.className('col-sm-4 col-sm-offset-1'))));
+        console.log('ENTER ACCOUNT INFORMATION is visible successfully');
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+
+        let password = await driver.findElement(By.name('password')); // Example: using ID
+
+        // Click on the radio button to select it
+        await password.sendKeys('Tatev2022.');
+        console.log('Password is entered');
+
 
     } catch (error) {
         console.error('An error occurred:', error);
@@ -47,4 +64,3 @@ async function runTests() {
 }
 
 runTests(); 
-
