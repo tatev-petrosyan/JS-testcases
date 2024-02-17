@@ -40,8 +40,8 @@ async function runTests() {
         await driver.wait(until.elementIsVisible(driver.findElement(By.className('col-sm-4 col-sm-offset-1'))));
 
         // Click on gender radio button
-        let genderRadioBtn = driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[1]/div[2]'));
-        genderRadioBtn.click();
+        let genderRadioBtn = await driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[1]/div[2]'));
+        await genderRadioBtn.click();
         wait();
 
         // Enter password
@@ -51,11 +51,26 @@ async function runTests() {
 
         // Select day in the dropdown
         const daysDropdown = await driver.findElement(By.id('days'));
-        daysDropdown.click();
+        await daysDropdown.click();
         const select = new Select(daysDropdown);
         await select.selectByValue('6');
         wait();
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+
+        const monthDropdown = await driver.findElement(By.id('months'));
+        await monthDropdown.click();
+        const selectMonth = new Select(monthDropdown);
+        await selectMonth.selectByValue('2');
+        wait();
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        const yearDropdown = await driver.findElement(By.id('years'));
+        await yearDropdown.click();
+        const selectYear = new Select(yearDropdown);
+        await selectYear.selectByValue('1996');
+        wait();
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
     } catch (error) {
         console.error('An error occurred:', error);
