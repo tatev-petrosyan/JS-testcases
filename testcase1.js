@@ -71,6 +71,14 @@ async function runTests() {
         await selectYear.selectByValue('1996');
         wait();
         await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        const checkBox1 = driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[6]/label'));
+        await checkBox1.click();
+        wait();
+        
+        const checkBox2 = driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[7]/label'));
+        await checkBox2.click();
+        wait();
 
     } catch (error) {
         console.error('An error occurred:', error);
