@@ -75,11 +75,53 @@ async function runTests() {
         const checkBox1 = driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[6]/label'));
         await checkBox1.click();
         wait();
-        
+
         const checkBox2 = driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[7]/label'));
         await checkBox2.click();
         wait();
 
+        let firstNameInput = await driver.findElement(By.id('first_name'));
+        await firstNameInput.sendKeys('Tatevik');
+        wait();
+
+        let lastNameInput = await driver.findElement(By.id('last_name'));
+        await lastNameInput.sendKeys('Petrosyan')
+        wait();
+
+        let companyInput = await driver.findElement(By.id('company'));
+        await companyInput.sendKeys('Google')
+        wait();
+
+        let address1Input = await driver.findElement(By.id('address1'));
+        await address1Input.sendKeys('Arno Babajanyan')
+        wait();
+        
+        let address2Input = await driver.findElement(By.id('address2'));
+        await address2Input.sendKeys('Arno Babajanyan 98/4')
+        wait();
+
+        const countryDropdown = await driver.findElement(By.xpath('//*[@id="country"]'));
+        await countryDropdown.click();
+        const selectCountry = new Select(countryDropdown);
+        await selectCountry.selectByValue('United States');
+        wait();
+
+        let stateInput = await driver.findElement(By.id('state'));
+        await stateInput.sendKeys('California')
+        wait();
+        
+        let cityInput = await driver.findElement(By.id('city'));
+        await cityInput.sendKeys('LA')
+        wait();
+
+        let zipInput = await driver.findElement(By.id('zipcode'));
+        await zipInput.sendKeys('0011')
+        wait();
+
+         let mobileInput = await driver.findElement(By.id('mobile_number'));
+         await mobileInput.sendKeys('055929229')
+         wait();
+       
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {
