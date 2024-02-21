@@ -51,7 +51,7 @@ async function runTests() {
         // Locate the Email Address input field by xpath and Enter the email address
         let emailAddressLocator = By.xpath('//*[@id="form"]/div/div/div[3]/div/form/input[3]');
         let email = await findElementWithRetry(driver, emailAddressLocator);
-        await email.sendKeys('Trttjnqq@IL.com');
+        await email.sendKeys('Trttaaaajnqq@IL.com');
 
         //Click on 'Signup' button
         let signUp1 = By.xpath('/html/body/section/div/div/div[3]/div/form/button');
@@ -96,28 +96,35 @@ async function runTests() {
         // Select checkbox 'Sign up for our newsletter!'
         let checkBox1 = By.xpath('//*[@id="form"]/div/div/div/div/form/div[6]/label')
         let box = await findElementWithRetry(driver, checkBox1);
+        // Scroll view to make sure box is visible
+        await driver.executeScript('arguments[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});', box);
         await box.click();
         wait();
+
         // Select checkbox 'Receive special offers from our partners!'
         let checkBox2 = By.xpath('//*[@id="form"]/div/div/div/div/form/div[7]/label')
         let box2 = await findElementWithRetry(driver, checkBox2);
         await box2.click();
         wait();
+
         // Fill First name data
         let firstNameInput = By.id('first_name');
         let firstName = await findElementWithRetry(driver, firstNameInput);
         await firstName.sendKeys('Tatevik');
         wait();
+
         // Fill Last name data
         let lastNameInput = By.id('last_name');
         let lastName = await findElementWithRetry(driver, lastNameInput);
         await lastName.sendKeys('Petrosyan');
         wait();
+
         // Fill Company data
         let companyInput = By.id('company');
         let company = await findElementWithRetry(driver, companyInput);
         await company.sendKeys('Google');
         wait();
+
         // Fill Address 1  data
         let address1Input = By.id('address1');
         let address1 = await findElementWithRetry(driver, address1Input);
@@ -161,7 +168,7 @@ async function runTests() {
         wait();
 
         // Click on button
-        let button3 = By.xpath('//*[@id="form"]/div/div/div/div[1]/form/input[2]');
+        let button3 = By.xpath('//*[@id="form"]/div/div/div/div/form/button');
         let button4 = await findElementWithRetry(driver, button3);
         await button4.click();
 
