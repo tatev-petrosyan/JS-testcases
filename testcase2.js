@@ -1,4 +1,4 @@
-const { Builder, By, until, Select, } = require('selenium-webdriver');
+const { Builder, By, until } = require('selenium-webdriver');
 
 async function wait() {
     // Wait a little bit
@@ -33,8 +33,8 @@ async function runTests() {
     // Go to site
     await driver.get('http://automationexercise.com');
 
-     // Make sure home is visible
-     await driver.wait(until.elementIsVisible(await findElementWithRetry(driver, By.xpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[1]/a/i'))));   
+    // Make sure home is visible
+    await driver.wait(until.elementIsVisible(await findElementWithRetry(driver, By.xpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[1]/a/i'))));   
 
      // Find signup button and click     
     let signUpButtonLocator = By.xpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[4]/a');
@@ -45,25 +45,24 @@ async function runTests() {
     await driver.wait(until.elementIsVisible(await findElementWithRetry(driver, By.xpath('//*[@id="form"]/div/div/div[1]/div/h2'))));
 
     // Enter correct email address 
-     let emailAddressLocator = By.xpath('//*[@id="form"]/div/div/div[1]/div/form/input[2]');
-     let email = await findElementWithRetry(driver, emailAddressLocator);
-     await email.sendKeys('tatev-petrosyan-96@mail.ru');
+    let emailAddressLocator = By.xpath('//*[@id="form"]/div/div/div[1]/div/form/input[2]');
+    let email = await findElementWithRetry(driver, emailAddressLocator);
+    await email.sendKeys('tatev-petrosyan-96@mail.ru');
     
-     // Enter correct password
-      let passwordLocator = By.xpath('//*[@id="form"]/div/div/div[1]/div/form/input[3]');
-     let password = await findElementWithRetry(driver, passwordLocator);
-     await password.sendKeys('Tatev2022.');
+    // Enter correct password
+    let passwordLocator = By.xpath('//*[@id="form"]/div/div/div[1]/div/form/input[3]');
+    let password = await findElementWithRetry(driver, passwordLocator);
+    await password.sendKeys('Tatev2022.');
 
-     // Click 'login' button
-     let loginButtonLocator2 = By.xpath('//*[@id="form"]/div/div/div[1]/div/form/button');
-     let loginButton2 = await findElementWithRetry(driver, loginButtonLocator2);
-     await loginButton2.click();
-     wait();
+    // Click 'login' button
+    let loginButtonLocator2 = By.xpath('//*[@id="form"]/div/div/div[1]/div/form/button');
+    let loginButton2 = await findElementWithRetry(driver, loginButtonLocator2);
+    await loginButton2.click();
+    wait();
 
-     // Verify that 'Logged in as username' is visible
-     await driver.wait(until.elementIsVisible(await findElementWithRetry(driver, By.xpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[10]/a'))));
-     wait();
-     
+    // Verify that 'Logged in as username' is visible
+    await driver.wait(until.elementIsVisible(await findElementWithRetry(driver, By.xpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[10]/a'))));
+    wait();
 
     // Click 'Delete Account' button
     let deleteAccountLocator = By.xpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[5]/a');
@@ -74,9 +73,7 @@ async function runTests() {
     // Verify that 'ACCOUNT DELETED!' is visible
     await driver.wait(until.elementIsVisible(await findElementWithRetry(driver, By.xpath('//*[@id="form"]/div/div/div/h2/b'))));
     wait();
-     console.log('Tatevik');
-
-    
+     
 
     } catch (error) {
         console.error('An error occurred:', error);
