@@ -1,4 +1,4 @@
-const { Builder, By, until, Key, Select } = require('selenium-webdriver');
+const { Builder, By, until, Key, Select, WebDriverWait, ExpectedConditions, Duration } = require('selenium-webdriver');
 
 async function wait() {
     // Wait a little bit
@@ -51,7 +51,7 @@ async function runTests() {
         // Locate the Email Address input field by xpath and Enter the email address
         let emailAddressLocator = By.xpath('//*[@id="form"]/div/div/div[3]/div/form/input[3]');
         let email = await findElementWithRetry(driver, emailAddressLocator);
-        await email.sendKeys('tatevik-pet@gmail.com');
+        await email.sendKeys('tatew-pet@gmail.com');
 
         //Click on 'Signup' button
         let signUpButtonLocator2 = By.xpath('/html/body/section/div/div/div[3]/div/form/button');
@@ -94,18 +94,12 @@ async function runTests() {
         await selectYears.selectByValue('1996');
 
         // Select checkbox 'Sign up for our newsletter!'
-        let checkBox1Locator = By.xpath('//*[@id="form"]/div/div/div/div/form/div[6]/label')
-        let checkbox1 = await findElementWithRetry(driver, checkBox1Locator);
-        // Scroll view to make sure box is visible
-        await driver.executeScript('arguments[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});', checkbox1);
-        await checkbox1.click();
-        wait();
+        let checkbox1Locator = await driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[6]/label'));
+        await driver.executeScript("arguments[0].click();", checkbox1Locator);
 
         // Select checkbox 'Receive special offers from our partners!'
-        let checkBox2Locator = By.xpath('//*[@id="form"]/div/div/div/div/form/div[7]/label')
-        let checkbox2 = await findElementWithRetry(driver, checkBox2Locator);
-        await checkbox2.click();
-        wait();
+        let checkbox2Locator = await driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[7]/label'));
+        await driver.executeScript("arguments[0].click();", checkbox2Locator);
 
         // Fill First name data
         let firstNameInputLocator = By.id('first_name');
