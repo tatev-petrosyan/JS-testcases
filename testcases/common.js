@@ -43,6 +43,10 @@ class SeleniumCommon {
         await this.driver.wait(until.elementIsVisible(await this.findElementWithRetry(By.className(locator))));
     }
 
+    async makeSureElementIsVisibleByXpath(locator) {
+        await this.driver.wait(until.elementIsVisible(await this.findElementWithRetry(By.xpath(locator))));
+    }
+
     async findElementWithRetry(locator, maxRetries = 5, retryDelay = 1500) {
         let retries = 0;
         while (retries < maxRetries) {
@@ -73,6 +77,17 @@ class SeleniumCommon {
     async sendKeysByName(locator, text) {
         let element = await this.findElementWithRetry(By.name(locator));
         await element.sendKeys(text);
+    }
+
+    async sendKeysByXpath(locator, text) {
+        let element = await this.findElementWithRetry(By.xpath(locator));
+        await element.sendKeys(text);
+    }
+
+    async selectDropDownValueById(locator, value) {
+        let element = await this.findElementWithRetry(By.id(locator));
+        let select = new Select(element)
+        await select.selectByValue(value);
     }
 }
 
