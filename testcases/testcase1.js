@@ -18,7 +18,7 @@ async function runTests() {
         await common.sendKeysByName('name', 'Tatevik');
 
         // Locate the Email Address input field by xpath and Enter the email address
-        await common.sendKeysByXpath('//*[@id="form"]/div/div/div[3]/div/form/input[3]', 'tatew-pet@gmail.com');
+        await common.sendKeysByXpath('//*[@id="form"]/div/div/div[3]/div/form/input[3]', 'te-pHHJB@l.com');
 
         // Click on 'Signup' button
         await common.clickElementByXpath('/html/body/section/div/div/div[3]/div/form/button');
@@ -26,135 +26,75 @@ async function runTests() {
         // Make ENTER ACCOUNT INFORMATION' is visible
         await common.makeSureElementIsVisibleByXpath('//*[@id="form"]/div/div/div/div/h2/b');
 
-        /* 
         // Click on gender radio button//*
-        let genderLocator = By.xpath('//*[@id="id_gender2"]');
-        let genderRadioBtn = await findElementWithRetry(driver, genderLocator);
-        await genderRadioBtn.click();
-        wait();
+        await common.clickElementByXpath('//*[@id="id_gender2"]');
 
         // Enter password
-        let passwordLocator = By.name('password')
-        let password = await findElementWithRetry(driver, passwordLocator);
-        await password.sendKeys('Tatev2022..');
-        wait();
-       */
+        await common.sendKeysByName('password', 'Tatev2022..');
 
         // Select days in the dropdown
         await common.selectDropDownValueById('days', '6');
 
-        /*
         // Select months in the dropdown
-        let monthsDropdownLocator = By.id('months');
-        let monthsDrop = await findElementWithRetry(driver, monthsDropdownLocator);
-        let selectMonths = new Select(monthsDrop)
-        await selectMonths.selectByValue('2');
- 
+        await common.selectDropDownValueById('months', '2');
+
         // Select years in the dropdown
-        let yearsDropdownLocator = By.id('years');
-        let yearsDrop = await findElementWithRetry(driver, yearsDropdownLocator);
-        let selectYears = new Select(yearsDrop)
-        await selectYears.selectByValue('1996');
- 
+        await common.selectDropDownValueById('years', '1996');
+
         // Select checkbox 'Sign up for our newsletter!'
-        let checkbox1Locator = await driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[6]/label'));
-        await driver.executeScript("arguments[0].click();", checkbox1Locator);
- 
+        await common.clickElementCheckboxByXpath('//*[@id="form"]/div/div/div/div/form/div[6]/label');
+
         // Select checkbox 'Receive special offers from our partners!'
-        let checkbox2Locator = await driver.findElement(By.xpath('//*[@id="form"]/div/div/div/div/form/div[7]/label'));
-        await driver.executeScript("arguments[0].click();", checkbox2Locator);
- 
+        await common.clickElementCheckboxByXpath('//*[@id="form"]/div/div/div/div/form/div[7]/label');
+
         // Fill First name data
-        let firstNameInputLocator = By.id('first_name');
-        let firstName = await findElementWithRetry(driver, firstNameInputLocator);
-        await firstName.sendKeys('Tatevik');
-        wait();
- 
+        await common.sendKeysById('first_name', 'Tatevik');
+
         // Fill Last name data
-        let lastNameInputLocator = By.id('last_name');
-        let lastName = await findElementWithRetry(driver, lastNameInputLocator);
-        await lastName.sendKeys('Petrosyan');
-        wait();
- 
+        await common.sendKeysById('last_name', 'Petrosyan');
+
         // Fill Company data
-        let companyInputLocator = By.id('company');
-        let company = await findElementWithRetry(driver, companyInputLocator);
-        await company.sendKeys('Google');
-        wait();
- 
+        await common.sendKeysById('company', 'Google');
+
         // Fill Address 1  data
-        let address1InputLocator = By.id('address1');
-        let address1 = await findElementWithRetry(driver, address1InputLocator);
-        await address1.sendKeys('Arno Babajanyan');
-        wait();
- 
+        await common.sendKeysById('address1', 'Arno Babajanyan');
+
         // Fill Address 2 data
-        let address2InputLocator = By.id('address2');
-        let address2 = await findElementWithRetry(driver, address2InputLocator);
-        await address2.sendKeys('Arno Babajanyan 98/4')
-        wait();
- 
+        await common.sendKeysById('address2', 'Arno Babajanyan 98/4');
+
         // Fill country data
-        let selectCountryLocator = By.xpath('//*[@id="country"]');
-        let selectCountryElem = await findElementWithRetry(driver, selectCountryLocator);
-        let countrySelect = new Select(selectCountryElem);
-        await countrySelect.selectByValue('United States');
- 
+        await common.sendKeysByXpath('//*[@id="country"]', 'United States');
+
         // Fill state data
-        let stateInputLocator = By.id('state');
-        let stateInput = await findElementWithRetry(driver, stateInputLocator);
-        await stateInput.sendKeys('California');
-        wait();
- 
+        await common.sendKeysById('state', 'California');
+
         // Fill city data
-        let cityInputLocator = By.id('city');
-        let cityInput = await findElementWithRetry(driver, cityInputLocator);
-        await cityInput.sendKeys('LA')
-        wait();
- 
+        await common.sendKeysById('city', 'LA');
+
         // Fill zipcode data
-        let zipInputLocator = By.id('zipcode');
-        let zipInput = await findElementWithRetry(driver, zipInputLocator);
-        await zipInput.sendKeys('0011')
-        wait();
- 
+        await common.sendKeysById('zipcode', '0011');
+
         // Fill mobile number  data
-        let mobileInputLocator = By.id('mobile_number');
-        let mobileInput = await findElementWithRetry(driver, mobileInputLocator);
-        await mobileInput.sendKeys('055929229')
-        wait();
- 
+        await common.sendKeysById('mobile_number', '055929229');
+
         // Click on button
-        let createAccountBtnLocator = By.xpath('//*[@id="form"]/div/div/div/div/form/button');
-        let createAccountBtn = await findElementWithRetry(driver, createAccountBtnLocator);
-        await createAccountBtn.click();
- 
+        await common.clickElementCheckboxByXpath('//*[@id="form"]/div/div/div/div/form/button');
+
         // Verify that 'ACCOUNT CREATED!' is visible
-        await driver.wait(until.elementIsVisible(await findElementWithRetry(driver, By.className('title text-center'))));
-        wait();
- 
+        await common.makeSureElementIsVisibleByClassName('title text-center');
+
         // Click 'Continue' button
-        let continueButtonLocator = By.xpath('//*[@id="form"]/div/div/div/div/a');
-        let continueButton = await findElementWithRetry(driver, continueButtonLocator);
-        await continueButton.click();
-        wait();
- 
+        await common.clickElementByXpath('//*[@id="form"]/div/div/div/div/a');
+
         // Verify that 'Logged in as username' is visible
-        await driver.wait(until.elementIsVisible(await findElementWithRetry(driver, By.partialLinkText("Logged in as"))));
-        wait();
- 
+        await common.makeSureElementIsVisibleByPartialLinkText("Logged in as");
+
         // Click 'Delete Account' button
-        let deleteAccountLocator = By.xpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[5]/a');
-        let deleteAccount = await findElementWithRetry(driver, deleteAccountLocator);
-        await deleteAccount.click();
-        wait();
- 
+        await common.clickElementByXpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[5]/a');
+
         // Click 'Continue' button
-        let continueButtonLocator1 = By.xpath('//*[@id="form"]/div/div/div/div/a');
-        let continueButton1 = await findElementWithRetry(driver, continueButtonLocator1);
-        await continueButton1.click();
-        wait();
-        */
+        await common.clickElementByXpath('//*[@id="form"]/div/div/div/div/a');
+
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {
