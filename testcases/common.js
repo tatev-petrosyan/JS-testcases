@@ -89,6 +89,7 @@ class SeleniumCommon {
 
     async sendKeysByXpath(locator, text) {
         let element = await this.findElementWithRetry(By.xpath(locator));
+        console.log("raz: element found");
         await element.sendKeys(text);
     }
 
