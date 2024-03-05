@@ -27,7 +27,7 @@ async function runTests() {
         await common.sendKeysById('message', "System doesn't accept my email");
 
         // Upload file 
-        await common.sendKeysByXpath('//*[@id="contact-us-form"]/div[5]/input', 'C:/\Users/\Acer/\OneDrive/\Pictures\/flowchart1.png');
+        await common.sendKeysByXpath('//*[@id="contact-us-form"]/div[5]/input', 'C:/\Users/\Acer/\OneDrive/\Pictures/\Снимки экрана/\Снимок экрана 2024-01-06 222803.png');
 
         await common.wait();
     } catch (error) {
