@@ -29,7 +29,20 @@ async function runTests() {
         // Upload file 
         await common.sendKeysByXpath('//*[@id="contact-us-form"]/div[5]/input', 'C:/\Users/\Acer/\OneDrive/\Pictures/\Снимки экрана/\Снимок экрана 2024-01-06 222803.png');
 
-        await common.wait();
+        // Click on 'Submit' button
+        await common.clickElementByXpath('//*[@id="contact-us-form"]/div[6]/input');
+
+         // Click on 'ok' button
+        await common.clickAlert();
+
+        // Verify success message 'Success! Your details have been submitted successfully.' is visible
+        await common.makeSureElementIsVisibleByXpath('//*[@id="contact-page"]/div[2]/div[1]/div/div[2]');
+
+        //Click 'Home' button and verify that landed to home page successfully
+        await common.clickElementByXpath('//*[@id="form-section"]/a');
+        await common.navigateTo('https://automationexercise.com/');
+
+
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {
