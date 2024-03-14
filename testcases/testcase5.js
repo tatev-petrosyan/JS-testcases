@@ -22,7 +22,7 @@ async function runTests() {
         // Click on 'Signup' button
         await common.clickElementByXpath('/html/body/section/div/div/div[3]/div/form/button');
 
-        // Make sure   'Email Address already exist!'  is visible
+        // Make sure   'Email Address already exist!' is visible
         await common.makeSureElementIsVisibleByXpath('//*[@id="form"]/div/div/div[3]/div/form/p');
 
     } catch (error) {

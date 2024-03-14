@@ -1,11 +1,18 @@
 
-const { Builder, By, Select, until, LocalFileDetector } = require('selenium-webdriver');
+const { Builder, By, Select, until, } = require('selenium-webdriver');
 const fs = require('fs')
+
 
 class SeleniumCommon {
     constructor() {
-        this.driver = new Builder().forBrowser('chrome').build();
-    }
+        let x = webdriver.Capabilities.chrome();
+        x.set('chromeOptions', {
+            'args': [],
+            'extensions': ['C:\Users\Acer\AppData\Local\Google\Chrome\User Data\Default\Extensions']
+        });
+
+        this.driver = new Builder().forBrowser('chrome').withCapabilities(x).build();
+    };
 
     async findElementWithRetry(locator, maxRetries = 5, retryDelay = 1500) {
         let retries = 0;
@@ -23,7 +30,7 @@ class SeleniumCommon {
     }
 
     async wait() {
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        await new Promise(resolve => setTimeout(resolve, 10000));
     }
 
     async sleep(ms) {
@@ -32,7 +39,10 @@ class SeleniumCommon {
 
     async quit() {
         await this.driver.quit();
-    }
+
+
+    };
+
 
     async openUrl(url) {
         await this.driver.get(url);
@@ -56,7 +66,6 @@ class SeleniumCommon {
     async clickElementCheckboxByXpath(xpath) {
         let element = await this.findElementWithRetry(By.xpath(xpath));
         await this.driver.executeScript("arguments[0].click();", element);
-
     }
 
     async clickElementByClassName(className) {
@@ -66,7 +75,6 @@ class SeleniumCommon {
 
     async clickElementByPartialLinkText(partialLinkText) {
         let element = await this.findElementWithRetry(By.partialLinkText(partialLinkText));
-        await element.click();
     }
 
     async makeSureElementIsVisibleByPartialLinkText(locator) {
@@ -81,7 +89,6 @@ class SeleniumCommon {
         await this.driver.wait(until.elementIsVisible(await this.findElementWithRetry(By.xpath(locator))));
     }
 
-
     async sendKeysByName(locator, text) {
         let element = await this.findElementWithRetry(By.name(locator));
         await element.sendKeys(text);
@@ -91,6 +98,13 @@ class SeleniumCommon {
         let element = await this.findElementWithRetry(By.xpath(locator));
         console.log("raz: element found");
         await element.sendKeys(text);
+    }
+
+    async sendKeysByXpathAndClick(locator, text) {
+        let element = await this.findElementWithRetry(By.xpath(locator));
+        console.log("raz: element found");
+        await element.sendKeys(text);
+        await element.click();
     }
 
     async sendKeysById(locator, text) {
@@ -103,6 +117,7 @@ class SeleniumCommon {
         let select = new Select(element)
         await select.selectByValue(value);
     }
+
 
     async selectLocatorByXpath(locator, xpath) {
         let element = await this.findElementWithRetry(By.xpath(locator));
@@ -118,6 +133,26 @@ class SeleniumCommon {
         let element = await this.findElementWithRetry(By.xpath(locator));
         await element.sendKeys(text);
     }
+
+    async clickAlert() {
+        let alert = await this.driver.wait(until.alertIsPresent());
+        let alert1 = await this.driver.switchTo().alert();
+        let alertText = await alert1.getText();
+        await alert1.accept();
+        consol.log(Tat)
+    }
+
+    async scrollDownByXpath(locator) {
+        let element = await this.findElementWithRetry(By.xpath(locator));
+        await this.driver.executeScript('arguments[0].scrollIntoView();', element);
+    }
+
+    async hoverOverByXpath(locator) {
+        let hoverElement = await this.findElementWithRetry(By.xpath(locator));
+        await this.driver.actions({ bridge: true }).move({ origin: hoverElement }).perform();
+    }
+
+
 }
 
 

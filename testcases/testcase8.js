@@ -17,15 +17,16 @@ async function runTests() {
         //The products list is visible
         await common.makeSureElementIsVisibleByXpath('/html/body/section[2]/div/div/div[2]/div');
         
-        //Click on 'View Product' of first product
-        await common.clickElementByXpath('/html/body/section[2]/div/div/div[2]/div/div[2]/div/div[2]/ul/li/a');
+        //Click on 'View Product' of first product // xndir ka 
+        await common.clickElementByXpath('//*[@id="dismiss-button"]/div/svg');
+        await common.clickElementByXpath('/html/body/section[2]/div[1]/div/div[2]/div/div[2]/div/div[2]/ul/li/a');
         
         //User is landed to product detail page
         await common.navigateTo('https://automationexercise.com/product_details/1');
 
         //Verify that detail detail is visible: product name, category, price, availability, condition, brand
         await common.makeSureElementIsVisibleByXpath("/html/body/section/div/div/div[2]/div[2]/div[2]/div");
-        
+
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {

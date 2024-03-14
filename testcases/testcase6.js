@@ -32,7 +32,7 @@ async function runTests() {
         // Click on 'Submit' button
         await common.clickElementByXpath('//*[@id="contact-us-form"]/div[6]/input');
 
-         // Click on 'ok' button
+        // Click on 'ok' button
         await common.clickAlert();
 
         // Verify success message 'Success! Your details have been submitted successfully.' is visible
