@@ -1,13 +1,23 @@
 
 const { Builder, By, Select, until, } = require('selenium-webdriver');
 const fs = require('fs')
+const chrome = require('selenium-webdriver/chrome');
 
 
-        class SeleniumCommon {
-            constructor() {
-                this.driver = new Builder().forBrowser('chrome').build();
-            }
+class SeleniumCommon {
+    constructor() {
+        const crxFilePath = 'C:/\Users/\Acer/\OneDrive/\Рабочий стол/\Tatev tests/\Unconfirmed 887703.crdownload';
 
+        const chromeOptions = new chrome.Options();
+        chromeOptions.addExtensions(crxFilePath);
+
+        const driver = new Builder()
+            .forBrowser('chrome')
+            .setChromeOptions(chromeOptions)
+            this.driver = new Builder().forBrowser('chrome').build();
+    }
+    
+        
     async findElementWithRetry(locator, maxRetries = 5, retryDelay = 1500) {
         let retries = 0;
         while (retries < maxRetries) {
@@ -145,6 +155,8 @@ const fs = require('fs')
         let hoverElement = await this.findElementWithRetry(By.xpath(locator));
         await this.driver.actions({ bridge: true }).move({ origin: hoverElement }).perform();
     }
+
+
 
 
 }
