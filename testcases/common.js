@@ -3,16 +3,10 @@ const { Builder, By, Select, until, } = require('selenium-webdriver');
 const fs = require('fs')
 
 
-class SeleniumCommon {
-    constructor() {
-        let x = webdriver.Capabilities.chrome();
-        x.set('chromeOptions', {
-            'args': [],
-            'extensions': ['C:\Users\Acer\AppData\Local\Google\Chrome\User Data\Default\Extensions']
-        });
-
-        this.driver = new Builder().forBrowser('chrome').withCapabilities(x).build();
-    };
+        class SeleniumCommon {
+            constructor() {
+                this.driver = new Builder().forBrowser('chrome').build();
+            }
 
     async findElementWithRetry(locator, maxRetries = 5, retryDelay = 1500) {
         let retries = 0;
