@@ -26,7 +26,7 @@ class SeleniumCommon {
     }
 
     async wait() {
-        await new Promise(resolve => setTimeout(resolve, 100000));
+        await new Promise(resolve => setTimeout(resolve, 10000));
     }
 
     async sleep(ms) {
