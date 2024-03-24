@@ -1,23 +1,15 @@
 
-const { Builder, By, Select, until, } = require('selenium-webdriver');
+const { Builder, By, Select, until, Key, } = require('selenium-webdriver');
 const fs = require('fs')
 const chrome = require('selenium-webdriver/chrome');
 
 
 class SeleniumCommon {
     constructor() {
-        const crxFilePath = 'C:/\Users/\Acer/\OneDrive/\Рабочий стол/\Tatev tests/\Unconfirmed 887703.crdownload';
 
-        const chromeOptions = new chrome.Options();
-        chromeOptions.addExtensions(crxFilePath);
-
-        const driver = new Builder()
-            .forBrowser('chrome')
-            .setChromeOptions(chromeOptions)
-            this.driver = new Builder().forBrowser('chrome').build();
+        this.driver = new Builder().forBrowser('chrome').build();
     }
-    
-        
+
     async findElementWithRetry(locator, maxRetries = 5, retryDelay = 1500) {
         let retries = 0;
         while (retries < maxRetries) {
@@ -34,7 +26,7 @@ class SeleniumCommon {
     }
 
     async wait() {
-        await new Promise(resolve => setTimeout(resolve, 10000));
+        await new Promise(resolve => setTimeout(resolve, 100000));
     }
 
     async sleep(ms) {
@@ -44,9 +36,7 @@ class SeleniumCommon {
     async quit() {
         await this.driver.quit();
 
-
     };
-
 
     async openUrl(url) {
         await this.driver.get(url);
@@ -122,7 +112,6 @@ class SeleniumCommon {
         await select.selectByValue(value);
     }
 
-
     async selectLocatorByXpath(locator, xpath) {
         let element = await this.findElementWithRetry(By.xpath(locator));
         let select = new Select(element)
@@ -156,10 +145,44 @@ class SeleniumCommon {
         await this.driver.actions({ bridge: true }).move({ origin: hoverElement }).perform();
     }
 
+    async spinBox(locator) {
+        let box = await this.findElementWithRetry(By.xpath(locator));
+        await this.driver.executeScript((element) => {
+            element.value = parseInt(element.value) + 3;
+        }, box);
+    }
 
+    async elementIsVisibleByXpath(locator) {
+        const element = await this.driver.wait(until.elementLocated(By.xpath(locator)), 10000);
+        await this.driver.wait(until.elementIsVisible(element), 10000);
+        await this.driver.wait(until.elementIsEnabled(element), 10000);
+        await element.click();
+    }
+
+    // Retrieve the quantity from the cart or wherever it's displayed
+    async verifyingExactQuantityByXpath(locator, number) {
+        const quantityElement = await this.driver.findElement(By.xpath(locator));
+        const displayedQuantity = await quantityElement.getText();
+
+        // Verify that the retrieved quantity matches the expected quantity
+        const expectedQuantity = (number); // Change this to your expected quantity
+        if (displayedQuantity === expectedQuantity) {
+            console.log('Quantity is correct.');
+        } else {
+            console.log('Quantity is incorrect.');
+        }
+
+    }
+    async hoverElementByXpath(locator1, locator2) {
+        const targetElement = await this.driver.findElement(By.xpath(locator1));
+        const hover = await this.driver.actions().move({ origin: targetElement }).perform();
+
+        // Click on the target element
+        await this.driver.findElement(By.xpath(locator2)).click();
+    } catch(error) {
+        console.error('An error occurred:', error);
+    }
 
 
 }
-
-
 module.exports = SeleniumCommon;
