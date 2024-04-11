@@ -2,6 +2,7 @@
 const { Builder, By, Select, until, Key, } = require('selenium-webdriver');
 const fs = require('fs')
 const chrome = require('selenium-webdriver/chrome');
+const assert = require('assert');
 
 
 class SeleniumCommon {
@@ -10,7 +11,7 @@ class SeleniumCommon {
         this.driver = new Builder().forBrowser('chrome').build();
     }
 
-    async findElementWithRetry(locator, maxRetries = 5, retryDelay = 1500) {
+    async findElementWithRetry(locator, maxRetries = 5, retryDelay = 2000) {
         let retries = 0;
         while (retries < maxRetries) {
             try {
@@ -173,13 +174,87 @@ class SeleniumCommon {
         }
 
     }
-    async hoverElementByXpath(locator1, locator2) {
-        const targetElement = await this.driver.findElement(By.xpath(locator1));
+   /* async hoverElementByXpath(locator1, locator2) {
+        const targetElement = await this.findElementWithRetry(By.xpath(locator1));
         const hover = await this.driver.actions().move({ origin: targetElement }).perform();
-
+       
         // Click on the target element
-        await this.driver.findElement(By.xpath(locator2)).click();
-    } catch(error) {
+        const hoverElement = await this.findElementWithRetry(By.xpath(locator2));
+        await hoverElement.click();
+    }
+  */
+    async hoverElementByXpath(locator1, locator2, locator3 ) {
+    // Find the element to hover over
+    const elementToHover =  await this.findElementWithRetry(By.xpath(locator1));
+
+     const actions = this.driver.actions();
+
+    // Move to the element to trigger the hover action
+    await actions.move({ origin: elementToHover }).perform();
+  
+ // Find the button element on the hovered element
+    const popup = await this.driver.wait(until.elementLocated(By.xpath(locator2)), 3000 );
+
+    // Click on the button
+    const buttonOnPopup = await popup.findElement(By.xpath(locator3));
+    await buttonOnPopup.click(); 
+}
+    async inputValueByXpath(locator1, input) {
+        // Locate input elements
+        const valueInput = await this.driver.findElement(By.xpath(locator1)).getText();
+        assert.strictEqual(valueInput, input);    
+    }
+
+    async table(locator1, locator2, locator3) {
+        let tableElement = await driver.findElementWithRetry(By.xpath(locator1));
+ 
+        // Extract data from the table
+        let tableRows = await tableElement.findElementWithRetry(By.xpath(locator2));
+        let tableData = [];
+        for (let row of tableRows) {
+            let rowData = await row.findElements(By.xpath(locator3));
+            let rowDataText = [];
+            for (let cell of rowData) {
+                rowDataText.push(await cell.getText());
+            }
+            tableData.push(rowDataText);
+        }
+ 
+        // Define expected data (replace with your expected values)
+        let expectedData = [
+            ['Column 1', 'Column 2', 'Column 3'],
+            ['Value 1', 'Value 2', 'Value 3'],
+            // Add more rows as needed
+        ];
+ 
+        // Compare expected data with actual data
+        let rowsMatch = true;
+        for (let i = 0; i < expectedData.length; i++) {
+            for (let j = 0; j < expectedData[i].length; j++) {
+                if (tableData[i][j] !== expectedData[i][j]) {
+                    console.log(`Mismatch at row ${i + 1}, column ${j + 1}: Expected ${expectedData[i][j]}, Actual ${tableData[i][j]}`);
+                    rowsMatch = false;
+                }
+            }
+        }
+ 
+        if (rowsMatch) {
+            console.log('Table data matches the expected values.');
+        } else {
+            console.log('Table data does not match the expected values.');
+        }
+        }
+ 
+
+
+
+
+
+
+
+
+
+    catch(error) {
         console.error('An error occurred:', error);
     }
 
