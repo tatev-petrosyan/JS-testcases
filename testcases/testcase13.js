@@ -15,20 +15,17 @@ async function runTests() {
         await common.makeSureElementIsVisibleByXpath('/html/body/section/div/div/div[2]/div[2]/div[2]/div');
 
         //Increase quantity to 4
+        await common.spinBox('//*[@id="quantity"]');
 
-         await common.spinBox('//*[@id="quantity"]');
+        //Click 'Add to cart' button
+        await common.clickElementByXpath('/html/body/section/div/div/div[2]/div[2]/div[2]/div/span/button');
+        common.wait();
 
-         //Click 'Add to cart' button
-         await common.clickElementByXpath('/html/body/section/div/div/div[2]/div[2]/div[2]/div/span/button');
-         common.wait();
-         
-         //Click 'View Cart' button
-         await common.elementIsVisibleByXpath('//*[@id="cartModal"]/div/div/div[2]/p[2]/a/u');
-         
-         //Verify that product is displayed in cart page with exact quantity
-        
+        //Click 'View Cart' button
+        await common.elementIsVisibleByXpath('//*[@id="cartModal"]/div/div/div[2]/p[2]/a/u');
 
-         await common.verifyingExactQuantityByXpath('//*[@id="product-3"]/td[4]/button', '4');
+        //Verify that product is displayed in cart page with exact quantity
+        await common.verifyingExactQuantityByXpath('//*[@id="product-3"]/td[4]/button', '4');
 
     } catch (error) {
         console.error('An error occurred:', error);
