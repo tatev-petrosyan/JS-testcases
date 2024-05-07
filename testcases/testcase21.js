@@ -26,6 +26,7 @@ async function runTests() {
 
         //Click 'Submit' button
         await common.clickElementByXpath('//*[@id="button-review"]');
+        await common.makeSureElementIsVisibleByXpath('//*[@id="review-section"]/div');
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {
