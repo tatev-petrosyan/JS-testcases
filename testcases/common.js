@@ -27,7 +27,7 @@ class SeleniumCommon {
     }
 
     async wait() {
-        await new Promise(resolve => setTimeout(resolve, 50000));
+        await new Promise(resolve => setTimeout(resolve, 15000));
     }
 
     async sleep(ms) {
@@ -242,9 +242,6 @@ class SeleniumCommon {
                 }
             }
         }
-
-
-
 
         if (rowsMatch) {
             console.log('Table data matches the expected values.');

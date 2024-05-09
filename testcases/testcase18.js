@@ -20,7 +20,6 @@ async function runTests() {
         // Verify that category page is displayed and confirm text 'WOMEN - DRESS PRODUCTS'
         // await common.makeSureElementIsVisibleByXpath('/html/body/section/div/div[2]/div[2]/div/h2');// TODO TAT
 
-
         // On left side bar, click on any sub-category link of 'Men' category
         await common.clickElementByXpath('//*[@id="accordian"]/div[2]/div[1]/h4/a');
         common.wait();
@@ -28,9 +27,6 @@ async function runTests() {
 
         //Verify that user is navigated to that category page
         await common.navigateTo('https://automationexercise.com/category_products/3');
-
-
-
 
     } catch (error) {
         console.error('An error occurred:', error);

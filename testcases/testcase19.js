@@ -21,7 +21,6 @@ async function runTests() {
 
         //Verify that user is navigated to that brand page and can see products
 
-
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {

@@ -54,7 +54,7 @@ async function runTests() {
         common.wait();
 
         //Verify Address Details and Review Your Order
-        await common.inputValueByXpath('//*[@id="address_delivery"]/li[2]', 'Mrs. Tatevik Petrosyan');
+        await common.inputValueByXpath('//*[@id="address_delivery"]/li[2]', 'Tatevik Petrosyan');
         await common.inputValueByXpath('//*[@id="address_delivery"]/li[3]', 'Google');
         await common.inputValueByXpath('//*[@id="address_delivery"]/li[4]', 'Arno Babajanyan');
         await common.inputValueByXpath('//*[@id="address_delivery"]/li[5]', 'Arno Babajanyan 98/4');
