@@ -18,7 +18,7 @@ async function runTests() {
         await common.clickElementByXpath('//*[@id="accordian"]/div[1]/div[1]/h4/a');
 
         // Verify that category page is displayed and confirm text 'WOMEN - DRESS PRODUCTS'
-        // await common.makeSureElementIsVisibleByXpath('/html/body/section/div/div[2]/div[2]/div/h2'); //Xndir kaaaaaaaaaaa//
+        // await common.makeSureElementIsVisibleByXpath('/html/body/section/div/div[2]/div[2]/div/h2');// TODO TAT
 
 
         // On left side bar, click on any sub-category link of 'Men' category

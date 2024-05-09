@@ -12,10 +12,10 @@ async function runTests() {
         await common.clickElementByXpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[2]/a');
 
         //Hover over first product and click 'Add to cart'// 
-        await common.hoverOverByXpath('/html/body/section[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/img');
-        await common.makeSureElementIsVisibleByXpath('/html/body/section[2]/div/div/div[2]/div/div[2]/div/div[1]/div[2]');
-        await common.clickElementByXpath('/html/body/section[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/a');
+        await common.hoverElementByXpath('/html/body/section[2]/div/div/div[2]/div/div[2]/div/div[1]/div[2]', '/html/body/section[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/a');
         common.wait();
+        await common.makeSureElementIsVisibleByXpath('//*[@id="cartModal"]/div/div');
+        await common.clickElementByXpath('//*[@id="cartModal"]/div/div/div[3]/button');
         
         //Click 'Continue Shopping' button
         await common.makeSureElementIsVisibleByXpath('//*[@id="cartModal"]/div/div');

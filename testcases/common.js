@@ -27,7 +27,7 @@ class SeleniumCommon {
     }
 
     async wait() {
-        await new Promise(resolve => setTimeout(resolve, 10000));
+        await new Promise(resolve => setTimeout(resolve, 50000));
     }
 
     async sleep(ms) {
@@ -64,7 +64,7 @@ class SeleniumCommon {
     }
 
     async clickElementByClassName(className) {
-        let element = await findElementWithRetry(By.className(className));
+        let element = await this.findElementWithRetry(By.className(className));
         await element.click();
     }
 
@@ -174,40 +174,45 @@ class SeleniumCommon {
         }
 
     }
-   /* async hoverElementByXpath(locator1, locator2) {
-        const targetElement = await this.findElementWithRetry(By.xpath(locator1));
-        const hover = await this.driver.actions().move({ origin: targetElement }).perform();
-       
-        // Click on the target element
-        const hoverElement = await this.findElementWithRetry(By.xpath(locator2));
-        await hoverElement.click();
+    /* async hoverElementByXpath(locator1, locator2) {
+         const targetElement = await this.findElementWithRetry(By.xpath(locator1));
+         const hover = await this.driver.actions().move({ origin: targetElement }).perform();
+        
+         // Click on the target element
+         const hoverElement = await this.findElementWithRetry(By.xpath(locator2));
+         await hoverElement.click();
+     }
+   */
+    async hoverElementByXpath(locator1, locator2, locator3) {
+        // Find the element to hover over
+        const elementToHover = await this.findElementWithRetry(By.xpath(locator1));
+
+        const actions = this.driver.actions();
+
+        // Move to the element to trigger the hover action
+        await actions.move({ origin: elementToHover }).perform();
+
+        // Find the button element on the hovered element
+        const popup = await this.driver.wait(until.elementLocated(By.xpath(locator2)), 3000);
+
+        // Click on the button
+        const buttonOnPopup = await popup.findElement(By.xpath(locator3));
+        await buttonOnPopup.click();
     }
-  */
-    async hoverElementByXpath(locator1, locator2, locator3 ) {
-    // Find the element to hover over
-    const elementToHover =  await this.findElementWithRetry(By.xpath(locator1));
-
-     const actions = this.driver.actions();
-
-    // Move to the element to trigger the hover action
-    await actions.move({ origin: elementToHover }).perform();
-  
- // Find the button element on the hovered element
-    const popup = await this.driver.wait(until.elementLocated(By.xpath(locator2)), 3000 );
-
-    // Click on the button
-    const buttonOnPopup = await popup.findElement(By.xpath(locator3));
-    await buttonOnPopup.click(); 
-}
     async inputValueByXpath(locator1, input) {
         // Locate input elements
         const valueInput = await this.driver.findElement(By.xpath(locator1)).getText();
-        assert.strictEqual(valueInput, input);    
+        assert.strictEqual(valueInput, input);
+    }
+
+    async scrollByXpath(locator1) {
+        const element = await this.driver.findElement(By.xpath(locator1));
+        await this.driver.executeScript('arguments[0].scrollIntoView();', element);
     }
 
     async table(locator1, locator2, locator3) {
         let tableElement = await driver.findElementWithRetry(By.xpath(locator1));
- 
+
         // Extract data from the table
         let tableRows = await tableElement.findElementWithRetry(By.xpath(locator2));
         let tableData = [];
@@ -219,14 +224,14 @@ class SeleniumCommon {
             }
             tableData.push(rowDataText);
         }
- 
+
         // Define expected data (replace with your expected values)
         let expectedData = [
             ['Column 1', 'Column 2', 'Column 3'],
             ['Value 1', 'Value 2', 'Value 3'],
             // Add more rows as needed
         ];
- 
+
         // Compare expected data with actual data
         let rowsMatch = true;
         for (let i = 0; i < expectedData.length; i++) {
@@ -237,14 +242,18 @@ class SeleniumCommon {
                 }
             }
         }
- 
+
+
+
+
         if (rowsMatch) {
             console.log('Table data matches the expected values.');
         } else {
             console.log('Table data does not match the expected values.');
         }
-        }
- 
+
+    }
+
 
 
 

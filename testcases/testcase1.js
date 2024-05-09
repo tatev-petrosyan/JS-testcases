@@ -18,7 +18,7 @@ async function runTests() {
         await common.sendKeysByName('name', 'Tatevik');
 
         // Locate the Email Address input field by xpath and Enter the email address
-        await common.sendKeysByXpath('//*[@id="form"]/div/div/div[3]/div/form/input[3]', 'te-pHHJB@l.com');
+        await common.sendKeysByXpath('//*[@id="form"]/div/div/div[3]/div/form/input[3]', 'tatev-petrosyan-96@mail.ru');
 
         // Click on 'Signup' button
         await common.clickElementByXpath('/html/body/section/div/div/div[3]/div/form/button');
@@ -90,10 +90,10 @@ async function runTests() {
         await common.makeSureElementIsVisibleByPartialLinkText("Logged in as");
 
         // Click 'Delete Account' button
-        await common.clickElementByXpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[5]/a');
+        // await common.clickElementByXpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[5]/a');
 
         // Click 'Continue' button
-        await common.clickElementByXpath('//*[@id="form"]/div/div/div/div/a');
+        // await common.clickElementByXpath('//*[@id="form"]/div/div/div/div/a');
 
     } catch (error) {
         console.error('An error occurred:', error);

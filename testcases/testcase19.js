@@ -14,7 +14,12 @@ async function runTests() {
         await common.makeSureElementIsVisibleByXpath('/html/body/section[2]/div/div/div[1]/div/div[2]');
         await common.wait();
         //Click on any brand name
-        await common.clickElementByXpath('/html/body/section/div/div[2]/div[1]/div/div[2]/div/ul/li[1]/a');
+        await common.clickElementByXpath('/html/body/section/div/div[2]/div[1]/div/div[2]/div/ul/li[1]/a');// TODO TAT
+        //Verify that user is navigated to brand page and brand products are displayed
+
+        // On left side bar, click on any other brand link
+
+        //Verify that user is navigated to that brand page and can see products
 
 
     } catch (error) {
