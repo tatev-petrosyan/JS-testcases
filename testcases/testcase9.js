@@ -1,7 +1,7 @@
-const SeleniumCommon9 = require('./common');
+const SeleniumCommon = require('./common');
 
 async function runTests() {
-    const common = new SeleniumCommon9();
+    const common = new SeleniumCommon();
     try {
         await common.openUrl('http://automationexercise.com');
 
@@ -13,7 +13,6 @@ async function runTests() {
 
         //Verify user is navigated to ALL PRODUCTS page successfully
         await common.navigateTo('https://automationexercise.com/products');
-
 
         //Enter product name in search input and click search button
         await common.sendKeysByXpath('//*[@id="search_product"]', 'blue top');

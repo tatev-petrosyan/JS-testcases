@@ -90,10 +90,10 @@ async function runTests() {
         await common.makeSureElementIsVisibleByPartialLinkText("Logged in as");
 
         // Click 'Delete Account' button
-        // await common.clickElementByXpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[5]/a');
+        await common.clickElementByXpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[5]/a');
 
         // Click 'Continue' button
-        // await common.clickElementByXpath('//*[@id="form"]/div/div/div/div/a');
+        await common.clickElementByXpath('//*[@id="form"]/div/div/div/div/a');
 
     } catch (error) {
         console.error('An error occurred:', error);

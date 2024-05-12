@@ -1,5 +1,5 @@
 
-const { Builder, By, Select, until, Key, } = require('selenium-webdriver');
+const { Builder, By, Select, until, Key, Options, } = require('selenium-webdriver');
 const fs = require('fs')
 const chrome = require('selenium-webdriver/chrome');
 const assert = require('assert');
@@ -7,8 +7,8 @@ const assert = require('assert');
 
 class SeleniumCommon {
     constructor() {
-
-        this.driver = new Builder().forBrowser('chrome').build();
+        let options = new chrome.Options();
+        this.driver = new Builder().forBrowser('chrome').setChromeOptions(options).build();
     }
 
     async findElementWithRetry(locator, maxRetries = 5, retryDelay = 2000) {
@@ -27,7 +27,7 @@ class SeleniumCommon {
     }
 
     async wait() {
-        await new Promise(resolve => setTimeout(resolve, 15000));
+        await new Promise(resolve => setTimeout(resolve, 5000));
     }
 
     async sleep(ms) {
@@ -40,6 +40,7 @@ class SeleniumCommon {
     };
 
     async openUrl(url) {
+        this.driver.manage().window().maximize();
         await this.driver.get(url);
     }
 
@@ -174,15 +175,7 @@ class SeleniumCommon {
         }
 
     }
-    /* async hoverElementByXpath(locator1, locator2) {
-         const targetElement = await this.findElementWithRetry(By.xpath(locator1));
-         const hover = await this.driver.actions().move({ origin: targetElement }).perform();
-        
-         // Click on the target element
-         const hoverElement = await this.findElementWithRetry(By.xpath(locator2));
-         await hoverElement.click();
-     }
-   */
+
     async hoverElementByXpath(locator1, locator2, locator3) {
         // Find the element to hover over
         const elementToHover = await this.findElementWithRetry(By.xpath(locator1));
@@ -208,6 +201,20 @@ class SeleniumCommon {
     async scrollByXpath(locator1) {
         const element = await this.driver.findElement(By.xpath(locator1));
         await this.driver.executeScript('arguments[0].scrollIntoView();', element);
+    }
+
+    async listByXpath(locator, text) {
+
+        let listElement = await this.driver.findElement(By.xpath(locator, text));
+
+        await listElement.click();
+    }
+    async waitUntilProductIsVisibleByXpath(locator) {
+        let element = await this.driver.wait(until.elementLocated(By.xpath(locator)), 10000); // Adjust the timeout as needed
+    }
+    async waitUntilProductIsClickableByXpath(locator) {
+        let element = await this.driver.wait(until.elementLocated(By.xpath(locator)), 20000); // Adjust the timeout as needed
+        await element.click();
     }
 
     async table(locator1, locator2, locator3) {
