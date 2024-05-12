@@ -1,7 +1,7 @@
-const SeleniumCommon14 = require('./common');
+const SeleniumCommon = require('./common');
 
 async function runTests() {
-    const common = new SeleniumCommon14();
+    const common = new SeleniumCommon();
     try {
 
         // Go to site
@@ -32,10 +32,8 @@ async function runTests() {
         common.wait();
 
         // Click 'Cart' button and verify that products are visible in cart
-
         await common.clickElementByXpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[3]/a');
         await common.makeSureElementIsVisibleByXpath('//*[@id="cart_items"]');
-
         await common.inputValueByXpath('//*[@id="product-16"]/td[2]/h4/a', "Sleeves Top and Short - Blue & Pink");
 
 
@@ -51,9 +49,6 @@ async function runTests() {
 
         //Verify that those products are visible in cart after login as well
         await common.inputValueByXpath('//*[@id="product-16"]/td[2]/h4/a', "Sleeves Top and Short - Blue & Pink");
-
-
-
 
 
     } catch (error) {

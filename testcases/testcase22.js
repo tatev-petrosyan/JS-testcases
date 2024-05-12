@@ -1,7 +1,7 @@
-const SeleniumCommon22 = require('./common');
+const SeleniumCommon = require('./common');
 
 async function runTests() {
-    const common = new SeleniumCommon22();
+    const common = new SeleniumCommon();
     try {
 
         // Go to site
@@ -14,10 +14,10 @@ async function runTests() {
         await common.makeSureElementIsVisibleByXpath('/html/body/section[2]/div/div/div[2]/div[2]/h2');
 
         //Click on 'Add To Cart' on Recommended product
-        await common.elementIsVisibleByXpath('//*[@id="recommended-item-carousel"]/div/div[2]/div[1]/div/div/div/a')
+       // await common.waitUntilProductIsVisibleByXpath('//*[@id="recommended-item-carousel"]/div/div[1]/div[1]/div/div/div/a')
         //await common.makeSureElementIsVisibleByXpath('//*[@id="recommended-item-carousel"]/div/div[1]/div[1]/div/div/div');
-        await common.clickElementByXpath('//*[@id="recommended-item-carousel"]/div/div[2]/div[1]/div/div/div/a');
-        await common.clickElementByXpath('//*[@id="cartModal"]/div/div/div[2]/p[2]/a'); // xnxdir ka
+        await common.waitUntilProductIsClickableByXpath('//*[@id="recommended-item-carousel"]/div/div[1]/div[1]/div/div/div/a');
+       // await common.clickElementByXpath('//*[@id="cartModal"]/div/div/div[2]/p[2]'); // xnxdir ka
 
 
 

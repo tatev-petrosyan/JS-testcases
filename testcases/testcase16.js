@@ -1,7 +1,7 @@
-const SeleniumCommon14 = require('./common');
+const SeleniumCommon = require('./common');
 
 async function runTests() {
-    const common = new SeleniumCommon14();
+    const common = new SeleniumCommon();
     try {
 
         // Go to site
@@ -23,21 +23,22 @@ async function runTests() {
 
         // Add products to cart
         await common.hoverElementByXpath('/html/body/section[2]/div/div/div[2]/div/div[5]/div', '/html/body/section[2]/div/div/div[2]/div/div[5]/div/div[1]/div[2]', '/html/body/section[2]/div/div/div[2]/div/div[5]/div/div[1]/div[2]/div/a');
-        common.wait()
+        common.wait();
+
         //Click 'Continue Shopping' button
         await common.makeSureElementIsVisibleByXpath('//*[@id="cartModal"]/div/div');
         await common.clickElementByXpath('//*[@id="cartModal"]/div/div/div[3]/button');
         common.wait();
-
         await common.hoverElementByXpath('/html/body/section[2]/div/div/div[2]/div/div[3]', '/html/body/section[2]/div/div/div[2]/div/div[3]/div/div[1]/div[2]', '/html/body/section[2]/div/div/div[2]/div/div[3]/div/div[1]/div[2]/div/a');
         common.wait();
+
         //Click 'Continue Shopping' button
         await common.makeSureElementIsVisibleByXpath('//*[@id="cartModal"]/div/div');
         await common.clickElementByXpath('//*[@id="cartModal"]/div/div/div[3]/button');
         common.wait();
-
         await common.hoverElementByXpath('/html/body/section[2]/div/div/div[2]/div/div[4]/div', '/html/body/section[2]/div/div/div[2]/div/div[4]/div/div[1]/div[2]', '/html/body/section[2]/div/div/div[2]/div/div[4]/div/div[1]/div[2]/div/a');
         common.wait();
+
         //Click 'Continue Shopping' button
         await common.makeSureElementIsVisibleByXpath('//*[@id="cartModal"]/div/div');
         await common.clickElementByXpath('//*[@id="cartModal"]/div/div/div[3]/button');

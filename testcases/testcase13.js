@@ -1,7 +1,7 @@
-const SeleniumCommon13 = require('./common');
+const SeleniumCommon = require('./common');
 
 async function runTests() {
-    const common = new SeleniumCommon13();
+    const common = new SeleniumCommon();
     try {
         await common.openUrl('http://automationexercise.com');
 
@@ -26,6 +26,7 @@ async function runTests() {
 
         //Verify that product is displayed in cart page with exact quantity
         await common.verifyingExactQuantityByXpath('//*[@id="product-3"]/td[4]/button', '4');
+
 
     } catch (error) {
         console.error('An error occurred:', error);

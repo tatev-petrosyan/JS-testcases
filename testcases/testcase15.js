@@ -99,7 +99,6 @@ async function runTests() {
         await common.sendKeysByXpath('//*[@id="payment-form"]/div[3]/div[3]/input', "2028");
         await common.clickElementByXpath('//*[@id="submit"]');
         common.wait();
-
         await common.makeSureElementIsVisibleByXpath('//*[@id="form"]/div/div/div/p');
 
         //Click 'Delete Account' button

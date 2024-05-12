@@ -1,7 +1,7 @@
-const SeleniumCommon14 = require('./common');
+const SeleniumCommon = require('./common');
 
 async function runTests() {
-    const common = new SeleniumCommon14();
+    const common = new SeleniumCommon();
     try {
 
         // Go to site

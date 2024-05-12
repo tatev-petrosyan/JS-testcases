@@ -1,8 +1,8 @@
 
-const SeleniumCommon22 = require('./common');
+const SeleniumCommon = require('./common');
 
 async function runTests() {
-    const common = new SeleniumCommon22();
+    const common = new SeleniumCommon();
     try {
 
         // Go to site
@@ -26,8 +26,8 @@ async function runTests() {
         let address1 = 'Arno Babajanyan';
         let address2 = 'Arno Babajanyan 98/4';
         let country = 'United States';
-        let company =  'Google';
-        let state =  'California';
+        let company = 'Google';
+        let state = 'California';
         let city = 'LA';
 
         await common.makeSureElementIsVisibleByXpath('//*[@id="form"]/div/div/div/div/h2/b');
@@ -41,7 +41,7 @@ async function runTests() {
         await common.sendKeysById('first_name', name);
         await common.sendKeysById('last_name', sureName);
         await common.sendKeysById('company', company);
-        await common.sendKeysById('address1', address1 );
+        await common.sendKeysById('address1', address1);
         await common.sendKeysById('address2', address2);
         await common.sendKeysByXpath('//*[@id="country"]', country);
         await common.sendKeysById('state', state);
@@ -67,13 +67,14 @@ async function runTests() {
 
         await common.hoverElementByXpath('/html/body/section[2]/div/div/div[2]/div/div[3]', '/html/body/section[2]/div/div/div[2]/div/div[3]/div/div[1]/div[2]', '/html/body/section[2]/div/div/div[2]/div/div[3]/div/div[1]/div[2]/div/a');
         common.wait();
+
         //Click 'Continue Shopping' button
         await common.makeSureElementIsVisibleByXpath('//*[@id="cartModal"]/div/div');
         await common.clickElementByXpath('//*[@id="cartModal"]/div/div/div[3]/button');
         common.wait();
-
         await common.hoverElementByXpath('/html/body/section[2]/div/div/div[2]/div/div[4]/div', '/html/body/section[2]/div/div/div[2]/div/div[4]/div/div[1]/div[2]', '/html/body/section[2]/div/div/div[2]/div/div[4]/div/div[1]/div[2]/div/a');
         common.wait();
+
         //Click 'Continue Shopping' button
         await common.makeSureElementIsVisibleByXpath('//*[@id="cartModal"]/div/div');
         await common.clickElementByXpath('//*[@id="cartModal"]/div/div/div[3]/button');
@@ -90,7 +91,7 @@ async function runTests() {
         common.wait();
 
         // Verify that the delivery address is same address filled at the time registration of account
-      //  await common.inputValueByXpath('//*[@id="address_delivery"]/li[2]', 'Mrs.'+ name + ' ' + sureName);
+        //  await common.inputValueByXpath('//*[@id="address_delivery"]/li[2]', 'Mrs.'+ name + ' ' + sureName);
         await common.inputValueByXpath('//*[@id="address_delivery"]/li[3]', company);
         await common.inputValueByXpath('//*[@id="address_delivery"]/li[4]', address1);
         await common.inputValueByXpath('//*[@id="address_delivery"]/li[5]', address2);
@@ -98,7 +99,7 @@ async function runTests() {
         await common.inputValueByXpath('//*[@id="address_delivery"]/li[7]', country);
         await common.inputValueByXpath('//*[@id="address_delivery"]/li[8]', '055929229');
         await common.makeSureElementIsVisibleByXpath('//*[@id="cart_info"]');
-    
+
         await common.inputValueByXpath('//*[@id="address_invoice"]/li[2]', "Mrs. Tatevik Petrosyan");
         await common.inputValueByXpath('//*[@id="address_invoice"]/li[3]', "Google");
         await common.inputValueByXpath('//*[@id="address_invoice"]/li[4]', "Arno Babajanyan");
@@ -106,7 +107,7 @@ async function runTests() {
         await common.inputValueByXpath('//*[@id="address_invoice"]/li[6]', "LA California 0011");
         await common.inputValueByXpath('//*[@id="address_invoice"]/li[7]', "United States");
         await common.inputValueByXpath('//*[@id="address_invoice"]/li[8]', "055929229");
-    
+
         //Click 'Delete Account' button
         await common.clickElementByXpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[5]/a');
 

@@ -1,7 +1,7 @@
-const SeleniumCommon14 = require('./common');
+const SeleniumCommon = require('./common');
 
 async function runTests() {
-    const common = new SeleniumCommon14();
+    const common = new SeleniumCommon();
     try {
 
         // Go to site
@@ -14,11 +14,11 @@ async function runTests() {
         await common.clickElementByXpath('//*[@id="accordian"]/div[1]/div[1]/h4/a');
         common.wait();
 
-        //Click on any category link under 'Women' category, for example: tops
-        await common.clickElementByXpath('//*[@id="accordian"]/div[1]/div[1]/h4/a');
+        //Click on any category link under 'Women' category, for example: Dress
+        await common.clickElementByXpath('//*[@id="Women"]/div/ul/li[1]/a');
 
         // Verify that category page is displayed and confirm text 'WOMEN - DRESS PRODUCTS'
-        // await common.makeSureElementIsVisibleByXpath('/html/body/section/div/div[2]/div[2]/div/h2');// TODO TAT
+         await common.makeSureElementIsVisibleByXpath('/html/body/section/div/div[2]/div[2]/div/h2');
 
         // On left side bar, click on any sub-category link of 'Men' category
         await common.clickElementByXpath('//*[@id="accordian"]/div[2]/div[1]/h4/a');

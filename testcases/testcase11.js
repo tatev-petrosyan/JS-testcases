@@ -1,7 +1,7 @@
-const SeleniumCommon11 = require('./common');
+const SeleniumCommon = require('./common');
 
 async function runTests() {
-    const common = new SeleniumCommon11();
+    const common = new SeleniumCommon();
     try {
         await common.openUrl('http://automationexercise.com');
 

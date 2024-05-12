@@ -1,7 +1,7 @@
-const SeleniumCommon14 = require('./common');
+const SeleniumCommon = require('./common');
 
 async function runTests() {
-    const common = new SeleniumCommon14();
+    const common = new SeleniumCommon();
     try {
         await common.openUrl('http://automationexercise.com');
 
@@ -124,7 +124,6 @@ async function runTests() {
         await common.sendKeysByXpath('//*[@id="ordermsg"]/textarea', "Խնդրում եմ առաքել հնարավորինս արագ։");
         await common.clickElementByXpath('//*[@id="cart_items"]/div/div[7]/a');
 
-
         // Enter payment details: Name on Card, Card Number, CVC, Expiration date
         await common.sendKeysByXpath('//*[@id="payment-form"]/div[1]/div/input', 'TATEVIK PETROSYAN');
         await common.sendKeysByXpath('//*[@id="payment-form"]/div[2]/div/input', '4565288558699654');
@@ -133,9 +132,6 @@ async function runTests() {
         await common.sendKeysByXpath('//*[@id="payment-form"]/div[3]/div[3]/input', '2027');
         //Click 'Pay and Confirm Order' button
         await common.clickElementByXpath('//*[@id="submit"]');
-        //Verify success message 'Your order has been placed successfully!'
-       // PROBLEM
-        //await common.makeSureElementIsVisibleByXpath('/html/body/script[7]/text()');
 
         //Click 'Delete Account' button
         await common.clickElementByXpath('//*[@id="header"]/div/div/div/div[2]/div/ul/li[5]/a');
