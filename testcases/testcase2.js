@@ -33,7 +33,6 @@ async function runTests() {
         // Verify that 'ACCOUNT DELETED!' is visible
         await common.makeSureElementIsVisibleByXpath('//*[@id="form"]/div/div/div/h2/b');
 
-
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {

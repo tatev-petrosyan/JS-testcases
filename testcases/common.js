@@ -1,10 +1,11 @@
-
 const { Builder, By, Select, until, Key, Options, } = require('selenium-webdriver');
 const fs = require('fs')
 const chrome = require('selenium-webdriver/chrome');
 const assert = require('assert');
 
-
+/*
+* Common class holding all repeating actions shared across all testcases
+*/
 class SeleniumCommon {
     constructor() {
         let options = new chrome.Options();
@@ -36,8 +37,7 @@ class SeleniumCommon {
 
     async quit() {
         await this.driver.quit();
-
-    };
+    }
 
     async openUrl(url) {
         this.driver.manage().window().maximize();
@@ -59,7 +59,7 @@ class SeleniumCommon {
         await element.click();
     }
 
-    async clickElementCheckboxByXpath(xpath) {
+    async clickCheckBoxByXpath(xpath) {
         let element = await this.findElementWithRetry(By.xpath(xpath));
         await this.driver.executeScript("arguments[0].click();", element);
     }
@@ -92,13 +92,11 @@ class SeleniumCommon {
 
     async sendKeysByXpath(locator, text) {
         let element = await this.findElementWithRetry(By.xpath(locator));
-        console.log("raz: element found");
         await element.sendKeys(text);
     }
 
     async sendKeysByXpathAndClick(locator, text) {
         let element = await this.findElementWithRetry(By.xpath(locator));
-        console.log("raz: element found");
         await element.sendKeys(text);
         await element.click();
     }
@@ -124,11 +122,6 @@ class SeleniumCommon {
         await this.driver.navigate(url);
     }
 
-    async sendKeysByXpath(locator, text) {
-        let element = await this.findElementWithRetry(By.xpath(locator));
-        await element.sendKeys(text);
-    }
-
     async clickAlert() {
         let alert = await this.driver.wait(until.alertIsPresent());
         let alert1 = await this.driver.switchTo().alert();
@@ -147,17 +140,16 @@ class SeleniumCommon {
         await this.driver.actions({ bridge: true }).move({ origin: hoverElement }).perform();
     }
 
-    async spinBox(locator) {
+    async increaseSpinboxValue(locator, val) {
         let box = await this.findElementWithRetry(By.xpath(locator));
-        await this.driver.executeScript((element) => {
-            element.value = parseInt(element.value) + 3;
-        }, box);
+        await this.driver.executeScript((element, incVal) => {
+            element.value = parseInt(element.value) + incVal;
+        }, box, val);
     }
 
     async elementIsVisibleByXpath(locator) {
         const element = await this.driver.wait(until.elementLocated(By.xpath(locator)), 10000);
-        await this.driver.wait(until.elementIsVisible(element), 10000);
-        await this.driver.wait(until.elementIsEnabled(element), 10000);
+        await this.driver.wait(until.elementIsVisible(element), 20000);
         await element.click();
     }
 
@@ -173,25 +165,21 @@ class SeleniumCommon {
         } else {
             console.log('Quantity is incorrect.');
         }
-
     }
 
     async hoverElementByXpath(locator1, locator2, locator3) {
         // Find the element to hover over
         const elementToHover = await this.findElementWithRetry(By.xpath(locator1));
-
         const actions = this.driver.actions();
-
         // Move to the element to trigger the hover action
         await actions.move({ origin: elementToHover }).perform();
-
         // Find the button element on the hovered element
         const popup = await this.driver.wait(until.elementLocated(By.xpath(locator2)), 3000);
-
         // Click on the button
         const buttonOnPopup = await popup.findElement(By.xpath(locator3));
         await buttonOnPopup.click();
     }
+
     async inputValueByXpath(locator1, input) {
         // Locate input elements
         const valueInput = await this.driver.findElement(By.xpath(locator1)).getText();
@@ -204,73 +192,22 @@ class SeleniumCommon {
     }
 
     async listByXpath(locator, text) {
-
         let listElement = await this.driver.findElement(By.xpath(locator, text));
-
         await listElement.click();
     }
+
     async waitUntilProductIsVisibleByXpath(locator) {
-        let element = await this.driver.wait(until.elementLocated(By.xpath(locator)), 10000); // Adjust the timeout as needed
+        await this.driver.wait(until.elementLocated(By.xpath(locator)), 10000); // Adjust the timeout as needed
     }
+
     async waitUntilProductIsClickableByXpath(locator) {
         let element = await this.driver.wait(until.elementLocated(By.xpath(locator)), 20000); // Adjust the timeout as needed
         await element.click();
     }
 
-    async table(locator1, locator2, locator3) {
-        let tableElement = await driver.findElementWithRetry(By.xpath(locator1));
-
-        // Extract data from the table
-        let tableRows = await tableElement.findElementWithRetry(By.xpath(locator2));
-        let tableData = [];
-        for (let row of tableRows) {
-            let rowData = await row.findElements(By.xpath(locator3));
-            let rowDataText = [];
-            for (let cell of rowData) {
-                rowDataText.push(await cell.getText());
-            }
-            tableData.push(rowDataText);
-        }
-
-        // Define expected data (replace with your expected values)
-        let expectedData = [
-            ['Column 1', 'Column 2', 'Column 3'],
-            ['Value 1', 'Value 2', 'Value 3'],
-            // Add more rows as needed
-        ];
-
-        // Compare expected data with actual data
-        let rowsMatch = true;
-        for (let i = 0; i < expectedData.length; i++) {
-            for (let j = 0; j < expectedData[i].length; j++) {
-                if (tableData[i][j] !== expectedData[i][j]) {
-                    console.log(`Mismatch at row ${i + 1}, column ${j + 1}: Expected ${expectedData[i][j]}, Actual ${tableData[i][j]}`);
-                    rowsMatch = false;
-                }
-            }
-        }
-
-        if (rowsMatch) {
-            console.log('Table data matches the expected values.');
-        } else {
-            console.log('Table data does not match the expected values.');
-        }
-
-    }
-
-
-
-
-
-
-
-
-
-
     catch(error) {
-        console.error('An error occurred:', error);
+        console.error('Selenium Common: An error occurred:', error);
     }
-
-
 }
+
 module.exports = SeleniumCommon;

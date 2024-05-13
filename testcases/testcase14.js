@@ -64,10 +64,10 @@ async function runTests() {
         await common.selectDropDownValueById('years', '1996');
 
         // Select checkbox 'Sign up for our newsletter!'
-        await common.clickElementCheckboxByXpath('//*[@id="form"]/div/div/div/div/form/div[6]/label');
+        await common.clickCheckBoxByXpath('//*[@id="form"]/div/div/div/div/form/div[6]/label');
 
         // Select checkbox 'Receive special offers from our partners!'
-        await common.clickElementCheckboxByXpath('//*[@id="form"]/div/div/div/div/form/div[7]/label');
+        await common.clickCheckBoxByXpath('//*[@id="form"]/div/div/div/div/form/div[7]/label');
 
         // Fill First name data
         await common.sendKeysById('first_name', 'Tatevik');
@@ -100,7 +100,7 @@ async function runTests() {
         await common.sendKeysById('mobile_number', '055929229');
 
         // Click on button
-        await common.clickElementCheckboxByXpath('//*[@id="form"]/div/div/div/div/form/button');
+        await common.clickCheckBoxByXpath('//*[@id="form"]/div/div/div/div/form/button');
 
         // Verify that 'ACCOUNT CREATED!' is visible
         await common.makeSureElementIsVisibleByClassName('title text-center');

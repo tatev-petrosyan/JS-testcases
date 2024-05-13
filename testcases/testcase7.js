@@ -14,8 +14,6 @@ async function runTests() {
         //Verify user is navigated to test cases page successfully
         await common.navigateTo('https://automationexercise.com/test_cases');
 
-
-
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {

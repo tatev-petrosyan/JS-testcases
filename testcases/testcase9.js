@@ -24,7 +24,6 @@ async function runTests() {
         //Verify all the products related to search are visible
         await common.makeSureElementIsVisibleByXpath('/html/body/section[2]/div[1]/div/div[2]/div/div[2]/div/div[1]/div[1]/img');
 
-
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {

@@ -32,6 +32,6 @@ async function runTests() {
     } finally {
         await common.quit();
     }
-
 }
+
 runTests();

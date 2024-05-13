@@ -1,7 +1,7 @@
-const SeleniumCommon14 = require('./common');
+const SeleniumCommon = require('./common');
 
 async function runTests() {
-    const common = new SeleniumCommon14();
+    const common = new SeleniumCommon();
     try {
         await common.openUrl('http://automationexercise.com');
 
@@ -20,8 +20,8 @@ async function runTests() {
         await common.selectDropDownValueById('days', '6');
         await common.selectDropDownValueById('months', '2');
         await common.selectDropDownValueById('years', '1996');
-        await common.clickElementCheckboxByXpath('//*[@id="form"]/div/div/div/div/form/div[6]/label');
-        await common.clickElementCheckboxByXpath('//*[@id="form"]/div/div/div/div/form/div[7]/label');
+        await common.clickCheckBoxByXpath('//*[@id="form"]/div/div/div/div/form/div[6]/label');
+        await common.clickCheckBoxByXpath('//*[@id="form"]/div/div/div/div/form/div[7]/label');
         await common.sendKeysById('first_name', 'Tatevik');
         await common.sendKeysById('last_name', 'Petrosyan');
         await common.sendKeysById('company', 'Google');
@@ -32,7 +32,7 @@ async function runTests() {
         await common.sendKeysById('city', 'LA');
         await common.sendKeysById('zipcode', '0011');
         await common.sendKeysById('mobile_number', '055929229');
-        await common.clickElementCheckboxByXpath('//*[@id="form"]/div/div/div/div/form/button');
+        await common.clickCheckBoxByXpath('//*[@id="form"]/div/div/div/div/form/button');
 
         // Verify 'ACCOUNT CREATED!' and click 'Continue' button 
         await common.makeSureElementIsVisibleByClassName('title text-center');

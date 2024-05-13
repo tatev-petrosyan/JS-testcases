@@ -15,7 +15,6 @@ async function runTests() {
 
         //Click on any brand name
        await common.listByXpath('/html/body/section/div/div[2]/div[1]/div/div[2]/div', "/brand_products/Polo");
-    
 
         //Verify that user is navigated to brand page and brand products are displayed
 
@@ -28,6 +27,6 @@ async function runTests() {
     } finally {
         await common.quit();
     }
-
 }
+
 runTests();

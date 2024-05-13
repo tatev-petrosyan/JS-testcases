@@ -21,7 +21,6 @@ async function runTests() {
         //Verify success message 'You have been successfully subscribed!' is visible
         await common.makeSureElementIsVisibleByXpath('//*[@id="success-subscribe"]/div');
 
-
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {

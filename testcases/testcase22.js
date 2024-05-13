@@ -3,7 +3,6 @@ const SeleniumCommon = require('./common');
 async function runTests() {
     const common = new SeleniumCommon();
     try {
-
         // Go to site
         await common.openUrl('http://automationexercise.com');
 
@@ -19,8 +18,6 @@ async function runTests() {
         await common.waitUntilProductIsClickableByXpath('//*[@id="recommended-item-carousel"]/div/div[1]/div[1]/div/div/div/a');
        // await common.clickElementByXpath('//*[@id="cartModal"]/div/div/div[2]/p[2]'); // xnxdir ka
 
-
-
         //Verify that product is displayed in cart page
         await common.makeSureElementIsVisibleByXpath('//*[@id="product-4"]'); // TODO TAT 
 
@@ -29,6 +26,6 @@ async function runTests() {
     } finally {
         await common.quit();
     }
-
 }
+
 runTests();
